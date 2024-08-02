@@ -19,8 +19,14 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password', 
+          'role',
     ];
+
+    // Add role constants
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_USER = 'user';
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,5 +49,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
     }
 }
